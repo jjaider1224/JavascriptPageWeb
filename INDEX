@@ -1,2 +1,11 @@
-html
-¡Hola, Mundo!
+﻿<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <title>Capacitándose en JavaScript</title>
+</head>
+<body>
+<script>
+
+</script>
+</body>
+</html>
