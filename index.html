@@ -4,54 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto Programación Web</title>
+    <style>
+        body {
+            background-color: #000000; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+            font-family: Arial, sans-serif;
+            text-align: center; /* Centrar texto */
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        #equation {
+            margin: 20px 0;
+        }
+        table {
+            margin: 0 auto; /* Centrar tabla */
+            border-collapse: collapse;
+            width: 60%;
+        }
+        table, th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+        th {
+            background-color: #333333;
+        }
+        #processBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Proyecto Programación Web</h1>
-    <p>Nombre Completo: José Jaider Salazar Hincapié</p>
-    <p>Código: 1006016597</p>
-    
-    <h2>Mi ecuación:</h2>
-    <img src="ecuacion.png" alt="Ecuación Matemática">
-    
-    <button id="procesarBtn">Procesar</button>
-    
-    <h2>Resultados:</h2>
-    <table border="1">
-        <tr>
-            <th>Error</th>
-            <th>Totales</th>
-            <th>Porcentaje</th>
-        </tr>
-        <tr>
-            <td>Errores de arcoseno</td>
-            <td id="totalArcoseno">0</td>
-            <td id="porcentajeArcoseno">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de arcocoseno</td>
-            <td id="totalArcocoseno">0</td>
-            <td id="porcentajeArcocoseno">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de raíz cuadrada</td>
-            <td id="totalRaizCuadrada">0</td>
-            <td id="porcentajeRaizCuadrada">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de división</td>
-            <td id="totalDivision">0</td>
-            <td id="porcentajeDivision">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de logaritmo natural</td>
-            <td id="totalLogaritmo">0</td>
-            <td id="porcentajeLogaritmo">0%</td>
-        </tr>
-    </table>
-    
-    <div id="grafico"></div>
+    <h2>Nombre Completo: José Jaider Salazar Hincapié</h2>
+    <h3>Código: 2116643</h3>
+    <h2>Nombre Completo: Gustavo Fory Mera</h2>
+    <h3>Código: (pendiente)</h3>
 
-    <script src="script.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="equation">
+        <h3>Mi ecuación:</h3>
+        <img src="Ecuacion_Matematica.png" alt="Ecuación Matemática">
+        <br><br>
+        <button id="processBtn">Procesar</button>
+    </div>
+
+    <div id="results">
+        <h3>Resultados:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Error</th>
+                    <th>Totales</th>
+                    <th>Porcentaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Errores de arcoseno</td>
+                    <td>0</td>
+                    <td>NaN%</td>
+                </tr>
+                <tr>
+                    <td>Errores de arcocoseno</td>
+                    <td>0</td>
+                    <td>NaN%</td>
+                </tr>
+                <tr>
+                    <td>Errores de raíz cuadrada</td>
+                    <td>0</td>
+                    <td>NaN%</td>
+                </tr>
+                <tr>
+                    <td>Errores de división</td>
+                    <td>0</td>
+                    <td>NaN%</td>
+                </tr>
+                <tr>
+                    <td>Errores de logaritmo natural</td>
+                    <td>0</td>
+                    <td>NaN%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
