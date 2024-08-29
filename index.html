@@ -14,7 +14,7 @@
         table {
             margin: 0 auto;
             border-collapse: collapse;
-            width: 50%;
+            width: 60%;
         }
         th, td {
             border: 1px solid white;
@@ -22,24 +22,46 @@
             text-align: center;
         }
         th {
-            background-color: #555;
-        }
-        td {
             background-color: #333;
         }
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .formula {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <h1>Proyecto Programación Web</h1>
-    <h2>José Jaider Salazar Hincapié</h2>
-    <p>Código: 2116643</p>
-    <h2>Gustavo Fory Mera</h2>
-    <p>Código: (pendiente)</p>
+    <h2>Nombre Completo: José Jaider Salazar Hincapié</h2>
+    <h2>Código: 2116643</h2>
+    <h2>Nombre Completo: Gustavo Fory Mera</h2>
+    <h2>Código: (pendiente)</h2>
 
-    <p>Mi ecuación:</p>
-    <img src="equation_image_url" alt="Ecuación Matemática">
-    <br><br>
-    <button onclick="procesar()">Procesar</button>
+    <div class="formula">
+        $$Y = \frac{\arccos\left(\frac{a + b}{c}\right) + \arcsin\left(d \times \sqrt{e - f}\right) + \ln(g)}{\sqrt{\frac{h}{i}} \times \ln(j \times k) + \arccos\left(\frac{l}{m}\right)}$$
+    </div>
+
+    <form>
+        <label for="equation">Mi ecuación:</label><br>
+        <img src="https://via.placeholder.com/150" alt="Ecuacion Matemática" /><br><br>
+        <input type="submit" value="Procesar">
+    </form>
+
     <h3>Resultados:</h3>
     <table>
         <tr>
@@ -49,30 +71,64 @@
         </tr>
         <tr>
             <td>Errores de arcoseno</td>
-            <td id="arcoseno-total">0</td>
-            <td id="arcoseno-percentage">NaN%</td>
+            <td id="arcsinTotal">0</td>
+            <td id="arcsinPercent">NaN%</td>
         </tr>
         <tr>
             <td>Errores de arcocoseno</td>
-            <td id="arcocoseno-total">0</td>
-            <td id="arcocoseno-percentage">NaN%</td>
+            <td id="arccosTotal">0</td>
+            <td id="arccosPercent">NaN%</td>
         </tr>
         <tr>
             <td>Errores de raíz cuadrada</td>
-            <td id="raiz-total">0</td>
-            <td id="raiz-percentage">NaN%</td>
+            <td id="sqrtTotal">0</td>
+            <td id="sqrtPercent">NaN%</td>
         </tr>
         <tr>
             <td>Errores de división</td>
-            <td id="division-total">0</td>
-            <td id="division-percentage">NaN%</td>
+            <td id="divisionTotal">0</td>
+            <td id="divisionPercent">NaN%</td>
         </tr>
         <tr>
             <td>Errores de logaritmo natural</td>
-            <td id="logaritmo-total">0</td>
-            <td id="logaritmo-percentage">NaN%</td>
+            <td id="logTotal">0</td>
+            <td id="logPercent">NaN%</td>
         </tr>
     </table>
+
+    <script>
+        // Ejemplo de cómo podrías hacer los cálculos (lógica hipotética)
+        function procesar() {
+            // Variables ficticias para ejemplo
+            let arcsinErrors = 100;
+            let arccosErrors = 50;
+            let sqrtErrors = 25;
+            let divisionErrors = 10;
+            let logErrors = 5;
+
+            let totalErrors = arcsinErrors + arccosErrors + sqrtErrors + divisionErrors + logErrors;
+
+            document.getElementById('arcsinTotal').textContent = arcsinErrors;
+            document.getElementById('arcsinPercent').textContent = ((arcsinErrors / totalErrors) * 100).toFixed(2) + "%";
+            
+            document.getElementById('arccosTotal').textContent = arccosErrors;
+            document.getElementById('arccosPercent').textContent = ((arccosErrors / totalErrors) * 100).toFixed(2) + "%";
+            
+            document.getElementById('sqrtTotal').textContent = sqrtErrors;
+            document.getElementById('sqrtPercent').textContent = ((sqrtErrors / totalErrors) * 100).toFixed(2) + "%";
+            
+            document.getElementById('divisionTotal').textContent = divisionErrors;
+            document.getElementById('divisionPercent').textContent = ((divisionErrors / totalErrors) * 100).toFixed(2) + "%";
+            
+            document.getElementById('logTotal').textContent = logErrors;
+            document.getElementById('logPercent').textContent = ((logErrors / totalErrors) * 100).toFixed(2) + "%";
+        }
+
+        // Llamar la función al enviar el formulario (sólo para ejemplo, puedes modificar según tu lógica)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            procesar();
+        });
+    </script>
 </body>
-<script src="script.js"></script>
 </html>
