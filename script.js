@@ -1,63 +1,66 @@
-document.getElementById("procesarBtn").addEventListener("click", function () {
-    let erroresArcoseno = 0, erroresArcocoseno = 0, erroresRaizCuadrada = 0, erroresDivision = 0, erroresLogaritmo = 0;
+function procesar() {
+    let arcosenoErrores = 0;
+    let arcocosenoErrores = 0;
+    let raizErrores = 0;
+    let divisionErrores = 0;
+    let logaritmoErrores = 0;
 
     for (let i = 0; i < 1000; i++) {
-        // Generar valores aleatorios entre -1 y 1
         let a = Math.random() * 2 - 1;
         let b = Math.random() * 2 - 1;
         let c = Math.random() * 2 - 1;
         let d = Math.random() * 2 - 1;
         let e = Math.random() * 2 - 1;
+        let f = Math.random() * 2 - 1;
         let g = Math.random() * 2 - 1;
-        let h = Math.random() * 2 - 1;
-        let i = Math.random() * 2 - 1;
-        let k = Math.random() * 2 - 1;
-        let p = Math.random() * 2 - 1;
-        let u = Math.random() * 2 - 1;
 
-        // Intentar calcular las funciones
-        try { Math.acos(a - b); } catch { erroresArcocoseno++; }
-        try { Math.asin(b * b - Math.sqrt(c - d)); } catch { erroresArcoseno++; }
-        try { Math.sqrt(c - d); } catch { erroresRaizCuadrada++; }
-        try { let division = d / e; } catch { erroresDivision++; }
-        try { Math.log(p); } catch { erroresLogaritmo++; }
+        try {
+            let acosValue = Math.acos(a - b);
+            if (isNaN(acosValue)) throw "Error de arcoseno";
+        } catch (e) {
+            arcosenoErrores++;
+        }
+
+        try {
+            let asinValue = Math.asin(c * c - Math.sqrt(d - e));
+            if (isNaN(asinValue)) throw "Error de arcocoseno";
+        } catch (e) {
+            arcocosenoErrores++;
+        }
+
+        try {
+            let sqrtValue = Math.sqrt(d - f);
+            if (isNaN(sqrtValue)) throw "Error de raíz cuadrada";
+        } catch (e) {
+            raizErrores++;
+        }
+
+        try {
+            let divisionValue = c / g;
+            if (isNaN(divisionValue) || !isFinite(divisionValue)) throw "Error de división";
+        } catch (e) {
+            divisionErrores++;
+        }
+
+        try {
+            let logValue = Math.log(d - f);
+            if (isNaN(logValue)) throw "Error de logaritmo natural";
+        } catch (e) {
+            logaritmoErrores++;
+        }
     }
 
-    let totalErrores = erroresArcoseno + erroresArcocoseno + erroresRaizCuadrada + erroresDivision + erroresLogaritmo;
-    
-    // Actualizar tabla
-    document.getElementById("totalArcoseno").innerText = erroresArcoseno;
-    document.getElementById("totalArcocoseno").innerText = erroresArcocoseno;
-    document.getElementById("totalRaizCuadrada").innerText = erroresRaizCuadrada;
-    document.getElementById("totalDivision").innerText = erroresDivision;
-    document.getElementById("totalLogaritmo").innerText = erroresLogaritmo;
+    let totalErrores = arcosenoErrores + arcocosenoErrores + raizErrores + divisionErrores + logaritmoErrores;
 
-    document.getElementById("porcentajeArcoseno").innerText = ((erroresArcoseno / totalErrores) * 100).toFixed(2) + "%";
-    document.getElementById("porcentajeArcocoseno").innerText = ((erroresArcocoseno / totalErrores) * 100).toFixed(2) + "%";
-    document.getElementById("porcentajeRaizCuadrada").innerText = ((erroresRaizCuadrada / totalErrores) * 100).toFixed(2) + "%";
-    document.getElementById("porcentajeDivision").innerText = ((erroresDivision / totalErrores) * 100).toFixed(2) + "%";
-    document.getElementById("porcentajeLogaritmo").innerText = ((erroresLogaritmo / totalErrores) * 100).toFixed(2) + "%";
+    document.getElementById("arcoseno-total").innerText = arcosenoErrores;
+    document.getElementById("arcocoseno-total").innerText = arcocosenoErrores;
+    document.getElementById("raiz-total").innerText = raizErrores;
+    document.getElementById("division-total").innerText = divisionErrores;
+    document.getElementById("logaritmo-total").innerText = logaritmoErrores;
 
-    // Mostrar gráfico
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Tipo de Error', 'Cantidad'],
-            ['Arcoseno', erroresArcoseno],
-            ['Arcocoseno', erroresArcocoseno],
-            ['Raíz Cuadrada', erroresRaizCuadrada],
-            ['División', erroresDivision],
-            ['Logaritmo Natural', erroresLogaritmo]
-        ]);
-
-        var options = {
-            title: 'Errores por tipo',
-            is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('grafico'));
-        chart.draw(data, options);
-    }
-});
+    document.getElementById("arcoseno-percentage").innerText = ((arcosenoErrores / totalErrores) * 100).toFixed(2) + "%";
+    document.getElementById("arcocoseno-percentage").innerText = ((arcocosenoErrores / totalErrores) * 100).toFixed(2) + "%";
+    document.getElementById("raiz-percentage").innerText = ((raizErrores / totalErrores) * 100).toFixed(2) + "%";
+    document.getElementById("division-percentage").innerText = ((divisionErrores / totalErrores) * 100).toFixed(2) + "%";
+    document.getElementById("logaritmo-percentage").innerText = ((logaritmoErrores / totalErrores) * 100).toFixed(2) + "%";
+}
