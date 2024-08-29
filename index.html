@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,101 +11,172 @@
             text-align: center;
             font-family: Arial, sans-serif;
         }
-        .equation-container {
-            margin: 20px 0;
-        }
+
         table {
-            margin: 0 auto;
+            width: 60%;
+            margin: 20px auto;
             border-collapse: collapse;
-            width: 80%;
         }
+
         th, td {
             border: 1px solid white;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
         }
+
         th {
-            background-color: grey;
+            background-color: #333;
+        }
+
+        #equation {
+            margin: 20px auto;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        #chart_div {
+            width: 900px; 
+            height: 500px; 
+            margin: 0 auto;
         }
     </style>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-
-    <h1>Proyecto Programación Web</h1>
-    <p>Nombre: José Jaider Salazar Hincapié</p>
-    <p>Código: 2116643</p>
-    <p>Nombre: Gustavo Fory Mera</p>
-    <p>Código: (pendiente)</p>
-
-    <div class="equation-container">
-        <p>Mi ecuación:</p>
-        <p>$$ Y = \frac{\arccos(a - b) + \arcsin(b \cdot b - \sqrt{c - d}) + \ln(p)}{\arcsin\left(\frac{d}{e} + \sqrt{d - g}\right) \cdot \ln(u - i) + \arccos\left(h - \frac{i}{k}\right)} $$</p>
-    </div>
-
-    <button onclick="procesar()">Procesar</button>
-
-    <h2>Resultados:</h2>
-    <table>
-        <tr>
-            <th>Error</th>
-            <th>Totales</th>
-            <th>Porcentaje</th>
-        </tr>
-        <tr>
-            <td>Errores de arcoseno</td>
-            <td id="arcsin-total">0</td>
-            <td id="arcsin-percentage">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de arcocoseno</td>
-            <td id="arccos-total">0</td>
-            <td id="arccos-percentage">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de raíz cuadrada</td>
-            <td id="sqrt-total">0</td>
-            <td id="sqrt-percentage">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de división</td>
-            <td id="division-total">0</td>
-            <td id="division-percentage">0%</td>
-        </tr>
-        <tr>
-            <td>Errores de logaritmo natural</td>
-            <td id="log-total">0</td>
-            <td id="log-percentage">0%</td>
-        </tr>
-    </table>
-
-    <script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
         function procesar() {
-            
-            let arcsinErrors = 253;
-            let arccosErrors = 556;
-            let sqrtErrors = 512;
+            const cycles = 1000;
+            let arcSenoErrors = 0;
+            let arcCosenoErrors = 0;
+            let sqrtErrors = 0;
             let divisionErrors = 0;
-            let logErrors = 512;
-            let totalErrors = arcsinErrors + arccosErrors + sqrtErrors + divisionErrors + logErrors;
+            let logErrors = 0;
 
-            document.getElementById('arcsin-total').innerText = arcsinErrors;
-            document.getElementById('arcsin-percentage').innerText = ((arcsinErrors / totalErrors) * 100).toFixed(2) + '%';
+            for (let i = 0; i < cycles; i++) {
+                let a = Math.random() * 2 - 1;
+                let b = Math.random() * 2 - 1;
+                let c = Math.random() * 2 - 1;
+                let d = Math.random() * 2 - 1;
+                let e = Math.random() * 2 - 1;
+                let f = Math.random() * 2 - 1;
+                let g = Math.random() * 2 - 1;
+                let h = Math.random() * 2 - 1;
+                let iVar = Math.random() * 2 - 1;
+                let j = Math.random() * 2 - 1;
+                let k = Math.random() * 2 - 1;
 
-            document.getElementById('arccos-total').innerText = arccosErrors;
-            document.getElementById('arccos-percentage').innerText = ((arccosErrors / totalErrors) * 100).toFixed(2) + '%';
+                // Calcular Y usando la ecuación
+                try {
+                    let Y = (Math.acos(a) + Math.asin(b) + Math.sqrt(c / d) + Math.log(Math.abs(e)) + Math.acos(f / g) + Math.asin(h) + Math.sqrt(iVar / j) + Math.log(Math.abs(k)));
+                } catch (error) {
+                    if (error instanceof RangeError) {
+                        if (error.message.includes("acos") || error.message.includes("asin")) {
+                            if (error.message.includes("acos")) arcSenoErrors++;
+                            if (error.message.includes("asin")) arcCosenoErrors++;
+                        }
+                        if (error.message.includes("sqrt")) sqrtErrors++;
+                        if (error.message.includes("division")) divisionErrors++;
+                        if (error.message.includes("log")) logErrors++;
+                    }
+                }
+            }
 
-            document.getElementById('sqrt-total').innerText = sqrtErrors;
-            document.getElementById('sqrt-percentage').innerText = ((sqrtErrors / totalErrors) * 100).toFixed(2) + '%';
+            let totalErrors = arcSenoErrors + arcCosenoErrors + sqrtErrors + divisionErrors + logErrors;
+            let arcSenoPercentage = (arcSenoErrors / cycles) * 100;
+            let arcCosenoPercentage = (arcCosenoErrors / cycles) * 100;
+            let sqrtPercentage = (sqrtErrors / cycles) * 100;
+            let divisionPercentage = (divisionErrors / cycles) * 100;
+            let logPercentage = (logErrors / cycles) * 100;
 
-            document.getElementById('division-total').innerText = divisionErrors;
-            document.getElementById('division-percentage').innerText = ((divisionErrors / totalErrors) * 100).toFixed(2) + '%';
+            document.getElementById("arcSenoErrors").textContent = arcSenoErrors;
+            document.getElementById("arcCosenoErrors").textContent = arcCosenoErrors;
+            document.getElementById("sqrtErrors").textContent = sqrtErrors;
+            document.getElementById("divisionErrors").textContent = divisionErrors;
+            document.getElementById("logErrors").textContent = logErrors;
 
-            document.getElementById('log-total').innerText = logErrors;
-            document.getElementById('log-percentage').innerText = ((logErrors / totalErrors) * 100).toFixed(2) + '%';
+            document.getElementById("arcSenoPercentage").textContent = arcSenoPercentage.toFixed(2) + "%";
+            document.getElementById("arcCosenoPercentage").textContent = arcCosenoPercentage.toFixed(2) + "%";
+            document.getElementById("sqrtPercentage").textContent = sqrtPercentage.toFixed(2) + "%";
+            document.getElementById("divisionPercentage").textContent = divisionPercentage.toFixed(2) + "%";
+            document.getElementById("logPercentage").textContent = logPercentage.toFixed(2) + "%";
+
+            drawChart(arcSenoErrors, arcCosenoErrors, sqrtErrors, divisionErrors, logErrors);
+        }
+
+        function drawChart(arcSenoErrors, arcCosenoErrors, sqrtErrors, divisionErrors, logErrors) {
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(function() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Error', 'Totales'],
+                    ['Errores de arcoseno', arcSenoErrors],
+                    ['Errores de arcocoseno', arcCosenoErrors],
+                    ['Errores de raíz cuadrada', sqrtErrors],
+                    ['Errores de división', divisionErrors],
+                    ['Errores de logaritmo natural', logErrors]
+                ]);
+
+                var options = {
+                    title: 'Errores por tipo',
+                    pieHole: 0.4,
+                    backgroundColor: 'black',
+                    legendTextStyle: {color: 'white'},
+                    titleTextStyle: {color: 'white'}
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            });
         }
     </script>
+</head>
+<body>
+    <h1>Proyecto Programación Web</h1>
+    <h2>Nombre: José Jaider Salazar Hincapié</h2>
+    <h3>Código: 2116643</h3>
+    <h2>Nombre: Gustavo Fory Mera</h2>
+    <h3>Código: (pendiente)</h3>
+    <div id="equation">
+        <img src="https://latex.codecogs.com/svg.latex?\inline&space;Y&space;=&space;\frac{\acos(a)&plus;\asin(b)&plus;\sqrt{\frac{c}{d}}&plus;\ln(e)&plus;\acos\left(\frac{f}{g}\right)&plus;\asin(h)&plus;\sqrt{\frac{i}{j}}&plus;\ln(k)}{\ln\left(\frac{c}{h}\right)&plus;\sqrt{\frac{g}{b}}}" alt="Ecuación Matemática" />
+    </div>
+    <p>Ecuación Usada:</p>
+    <button onclick="procesar()">Procesar</button>
 
+    <div id="results">
+        <h2>Resultados:</h2>
+        <table>
+            <tr>
+                <th>Error</th>
+                <th>Totales</th>
+                <th>Porcentaje</th>
+            </tr>
+            <tr>
+                <td>Errores de arcoseno</td>
+                <td id="arcSenoErrors">0</td>
+                <td id="arcSenoPercentage">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de arcocoseno</td>
+                <td id="arcCosenoErrors">0</td>
+                <td id="arcCosenoPercentage">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de raíz cuadrada</td>
+                <td id="sqrtErrors">0</td>
+                <td id="sqrtPercentage">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de división</td>
+                <td id="divisionErrors">0</td>
+                <td id="divisionPercentage">0%</td>
+            </tr>
+            <tr>
+                <td>Errores de logaritmo natural</td>
+                <td id="logErrors">0</td>
+                <td id="logPercentage">0%</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="chart_div"></div>
 </body>
 </html>
