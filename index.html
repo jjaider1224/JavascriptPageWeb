@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo de Página HTML5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        #grafico {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            background-color: #fff; /* Fondo blanco igual que el contenedor */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        /* Estilo personalizado para los tooltips */
+        .google-visualization-tooltip {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .google-visualization-tooltip span {
+            color: #000; /* Color negro para el texto del tooltip */
+        }
+    </style>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        function procesar() {
+            const ciclos = 1000;
+            let erroresArcoseno = 0;
+            let erroresArcocoseno = 0;
+            let erroresRaizCuadrada = 0;
+            let erroresDivision = 0;
+            let erroresLogaritmoNatural = 0;
+
+            for (let ciclo = 0; ciclo < ciclos; ciclo++) {
+                let a = Math.random() * 2 - 1;
+                let b = Math.random() * 2 - 1;
+                let c = Math.random() * 2 - 1;
+                let d = Math.random() * 2 - 1;
+                let e = Math.random() * 2 - 1;
+                let f = Math.random() * 2 - 1;
+                let g = Math.random() * 2 - 1;
+                let h = Math.random() * 2 - 1;
+                let i = Math.random() * 2 - 1;
+                let j = Math.random() * 2 - 1;
+                let k = Math.random() * 2 - 1;
+                let l = Math.random() * 2 - 1;
+                let m = Math.random() * 2 - 1;
+                let n = Math.random() * 2 - 1;
+                let o = Math.random() * 2 - 1;
+                let p = Math.random() * 2 - 1;
+                let q = Math.random() * 2 - 1;
+                let r = Math.random() * 2 - 1;
+                let s = Math.random() * 2 - 1;
+                let t = Math.random() * 2 - 1;
+
+                try {
+                    // Verificaciones previas para evitar errores comunes
+                    if (Math.abs(a - b) > 1 || Math.abs(c - d) > 1 || Math.abs(e - f) > 1 || Math.abs(g - h) > 1) {
+                        throw new Error('Valor fuera de rango para arcoseno o arcocoseno');
+                    }
+                    if (i - j < 0 || k - l < 0) {
+                        throw new Error('Valor negativo para raíz cuadrada');
+                    }
+                    if (m <= 0 || n <= 0) {
+                        throw new Error('Valor no positivo para logaritmo natural');
+                    }
+                    if (p === 0 || r === 0 || t === 0) {
+                        throw new Error('División por cero');
+                    }
+
+                    let resultado = (
+                        Math.acos(a - b) + 
+                        Math.acos(c - d) + 
+                        Math.asin(e - f) + 
+                        Math.asin(g - h) + 
+                        Math.sqrt(i - j) + 
+                        Math.sqrt(k - l) + 
+                        Math.log(m) + 
+                        Math.log(n)
+                    ) / (
+                        (o / p) + 
+                        (q / r) + 
+                        (s / t)
+                    );
+                } catch (error) {
+                    if (error.message.includes('Valor fuera de rango para arcoseno o arcocoseno')) {
+                        erroresArcoseno++;
+                        erroresArcocoseno++;
+                    }
+                    if (error.message.includes('Valor negativo para raíz cuadrada')) erroresRaizCuadrada++;
+                    if (error.message.includes('Valor no positivo para logaritmo natural')) erroresLogaritmoNatural++;
+                    if (error.message.includes('División por cero')) erroresDivision++;
+                }
+            }
+
+            let totalErrores = erroresArcoseno + erroresArcocoseno + erroresRaizCuadrada + erroresDivision + erroresLogaritmoNatural;
+            let porcentajeErrores = (totalErrores / ciclos) * 100;
+
+            document.getElementById('resultados').innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Error</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total de errores de arcoseno</td>
+                            <td>${erroresArcoseno}</td>
+                        </tr>
+                        <tr>
+                            <td>Total de errores de arcocoseno</td>
+                            <td>${erroresArcocoseno}</td>
+                        </tr>
+                        <tr>
+                            <td>Total de errores de raíz cuadrada</td>
+                            <td>${erroresRaizCuadrada}</td>
+                        </tr>
+                        <tr>
+                            <td>Total de errores de división</td>
+                            <td>${erroresDivision}</td>
+                        </tr>
+                        <tr>
+                            <td>Total de errores de logaritmo natural</td>
+                            <td>${erroresLogaritmoNatural}</td>
+                        </tr>
+                        <tr>
+                            <td>Porcentaje de errores</td>
+                            <td>${porcentajeErrores.toFixed(2)}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(() => drawChart(erroresArcoseno, erroresArcocoseno, erroresRaizCuadrada, erroresDivision, erroresLogaritmoNatural));
+
+            function drawChart(erroresArcoseno, erroresArcocoseno, erroresRaizCuadrada, erroresDivision, erroresLogaritmoNatural) {
+                var data = google.visualization.arrayToDataTable([
+                    ['Tipo de Error', 'Cantidad'],
+                    ['Arcoseno', erroresArcoseno],
+                    ['Arcocoseno', erroresArcocoseno],
+                    ['Raíz Cuadrada', erroresRaizCuadrada],
+                    ['División', erroresDivision],
+                    ['Logaritmo Natural', erroresLogaritmoNatural]
+                ]);
+
+                var options = {
+                    title: 'Errores en la Ecuación',
+                    is3D: true,
+                    pieSliceText: 'label',
+                    legend: { position: 'bottom' },
+                    chartArea: { left: 0, top: 0, width: '100%', height: '80%' },
+                    backgroundColor: 'transparent',
+                    slices: {
+                        0: { offset: 0.1, color: '#FF9999' },
+                        1: { offset: 0.1, color: '#66B3FF' },
+                        2: { offset: 0.1, color: '#99FF99' },
+                        3: { offset: 0.1, color: '#FFCC99' },
+                        4: { offset: 0.1, color: '#FFB3E6' }
+                    },
+                    tooltip: { 
+                        textStyle: { color: 'black' }, // Texto negro para el tooltip
+                        showColorCode: true
+                    }
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('grafico'));
+                chart.draw(data, options);
+
+                // Cambiar el color del texto en los tooltips usando JavaScript
+                setTimeout(() => {
+                    const tooltips = document.querySelectorAll('.google-visualization-tooltip text');
+                    tooltips.forEach(el => el.style.fill = 'black');
+                }, 100);
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1> Corte1-HTML5</h1>
+    </header>
+    <div class="container">
+        <p>Nombre: Gustavo Fory Mera - Código: 2216600</p>
+        <p>Nombre: Jose Jaider Salazar - Código: 2116643</p>
+        <img src="https://latex.codecogs.com/svg.latex?Y%20%3D%20%5Cfrac%7B%5Ccos%5E%7B-1%7D%28a%20-%20b%29%20%2B%20%5Ccos%5E%7B-1%7D%28c%20-%20d%29%20%2B%20%5Csin%5E%7B-1%7D%28e%20-%20f%29%20%2B%20%5Csin%5E%7B-1%7D%28g%20-%20h%29%20%2B%20%5Csqrt%7Bi%20-%20j%7D%20%2B%20%5Csqrt%7Bk%20-%20l%7D%20%2B%20%5Cln%28m%29%20%2B%20%5Cln%28n%29%7D%7B%5Cfrac%7Bo%7D%7Bp%7D%20%2B%20%5Cfrac%7Bq%7D%7Br%7D%20%2B%20%5Cfrac%7Bs%7D%7Bt%7D%7D" alt="Ecuación Matemática">
+        <button onclick="procesar()">Procesar</button>
+        <div id="resultados"></div>
+        <div id="grafico"></div>
+    </div>
+</body>
+</html>
